@@ -1,13 +1,20 @@
 const express = require('express');
+const parser = require('body-parser');
+const ghHelper = require('../helpers/github.js');
+const mongoHelper = require('../database/index.js')
 let app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(parser.json());
 
 app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
+  ghHelper.getReposByUsername(req.body.name, (error, response, body) => {
+    mongoHelper.save(JSON.parse(body), (saveResp) => {
+      res.send(saveResp);
+    });
+      
+  });
+
 });
 
 app.get('/repos', function (req, res) {

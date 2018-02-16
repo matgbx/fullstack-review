@@ -15,7 +15,20 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+    // send post request to server
+    $.ajax({
+      type: "POST",
+      url: '/repos',
+      data: JSON.stringify({name: term}),
+      contentType: 'application/json',
+      success: (data)=> {
+        console.log('Successfully connected to server!!');
+        console.log(data);
+      },
+      error: (error) => {
+        console.log('ERROR - Could not connect to server: ', error);
+      }
+    });
   }
 
   render () {
