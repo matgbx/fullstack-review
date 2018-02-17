@@ -12,8 +12,11 @@ class App extends React.Component {
     }
 
   }
+  componentDidMount() {
+    this.fetch();
+  }
 
-  search (term) {
+  search(term) {
     console.log(`${term} was searched`);
     // send post request to server
     $.ajax({
@@ -23,6 +26,21 @@ class App extends React.Component {
       contentType: 'application/json',
       success: (data)=> {
         console.log('Successfully connected to server!!');
+        console.log(data);
+      },
+      error: (error) => {
+        console.log('ERROR - Could not connect to server: ', error);
+      }
+    });
+  }
+
+  fetch() {
+    $.ajax({
+      type: "GET",
+      url: '/repos',
+      contentType: 'application/json',
+      success: (data)=> {
+        console.log('Data recevied');
         console.log(data);
       },
       error: (error) => {

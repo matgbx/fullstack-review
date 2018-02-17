@@ -5,7 +5,7 @@ let repoSchema = mongoose.Schema({
   // TODO: your schema here!
     user_id: Number,
     username: String,
-    repo_id: Number,
+    repo_id: {type: Number, index: {unique: true}},
     repo_url: String,
     watchers_count: Number
 });
@@ -13,26 +13,29 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (data, callback) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
-  // callback(typeof data);
   data.forEach(repo => {
-    callback(repo.owner.login)
     let aRepo = new Repo({
       user_id: repo.owner.id,
       username: repo.owner.login,
-      repo_id: repo.id,
+      repo_id:  repo.id,
       repo_url: repo.html_url,
       watchers_count: repo.watchers_count
-    })
+    });
 
     aRepo.save(function(err) {
-    if (err) throw err;      
-    console.log('repo successfully saved.');
-    })
-  })
+      if (err) {console.log(err);}      
+      console.log('repo successfully saved.');
+    });
+  });
+};
 
+
+let find = (callback) => {
+  Repo.$where('this.watchers_count >= 0').exec((err, docs) => {
+    docs.sort((a,b) => a.watchers_count - b.watchers_count)
+    callback(docs);
+  })
 } 
 
 module.exports.save = save;
+module.exports.find = find;
