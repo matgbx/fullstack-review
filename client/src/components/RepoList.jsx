@@ -11,7 +11,7 @@ const RepoList = (props) => {
       {
         props.repos.map((repo) => {
           return <div>
-                    <a href={repo.repo_url}>{repo.username + ' - ' + repo.name}</a>
+                   <a href={repo.repo_url}>{repo.username + ' - ' + repo.name}</a>
                   </div>
         }) 
       }

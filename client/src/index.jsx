@@ -57,7 +57,7 @@ class App extends React.Component {
   }
 
   render () {
-    return (<div>
+    return (<div className="appView">
       <h1 className="title">Github Fetcher</h1>
       <h5 className="totalCount">There are {this.state.totalRepos} total repos in the database.</h5>      
       <Search onSearch={this.search.bind(this)}/>
