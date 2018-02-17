@@ -1,0 +1,40 @@
+body {
+  padding-bottom: 50px;
+  border: 1px solid #848587;
+  border-radius: 10px;
+}
+.searchBox {
+  text-align: center;
+  background: #b3cbf2;
+  border-top: 1px solid #848587;
+  border-bottom: 1px solid #848587;
+  padding-bottom: 10px;
+}
+
+.title {
+  background: #b3cbf2;
+  padding: 20px 0px 40px 0px;
+  text-align: center;
+}
+
+.totalCount {
+  text-align: center;
+  font-size: 15px
+}
+
+.top25title {
+  text-align: center;
+  margin: 10px 0px 10px 0px;
+}
+.top25box {
+  text-align: center;
+}
+
+.top25list {
+  width: 300px;
+  text-align: left;
+  padding: 5px 0px 30px 10px;
+  background: #eee;
+  border-top: 1px solid #848587;
+  border-bottom: 1px solid #848587;
+}

@@ -3,15 +3,20 @@ import React from 'react';
 const RepoList = (props) => {
   return (
   <div>
-    These are the Top {props.repos.length} repos by size.
-    {
-      props.repos.map((repo) => {
-        return <div>
-                  <a href={repo.repo_url}>{repo.username + ' - ' + repo.name}</a>
-                </div>
-      })
-      
-    }
+    <div className="top25title">
+      Here are the Top 25 repos by size:
+    </div>
+    <div className="top25box">
+      <div className="top25list">
+      {
+        props.repos.map((repo) => {
+          return <div>
+                    <a href={repo.repo_url}>{repo.username + ' - ' + repo.name}</a>
+                  </div>
+        }) 
+      }
+      </div>
+    </div>
     
   </div>
   )

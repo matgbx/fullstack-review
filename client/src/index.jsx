@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      repos: []
+      repos: [],
+      totalRepos: 0
     }
 
   }
@@ -28,7 +29,8 @@ class App extends React.Component {
         console.log('Successfully connected to server!!');
         console.log(data);
         this.setState({
-          repos: data
+          repos: data.slice(0,-1),
+          totalRepos: data.slice(-1)
         })
       },
       error: (error) => {
@@ -41,11 +43,11 @@ class App extends React.Component {
     $.ajax({
       type: "GET",
       url: '/repos',
-      contentType: 'application/json',
       success: (data)=> {
         console.log('Data recevied');
         this.setState({
-          repos: data
+          repos: data.slice(0,-1),
+          totalRepos: data.slice(-1)
         })
       },
       error: (error) => {
@@ -56,9 +58,12 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Github Fetcher</h1>      
+      <h1 className="title">Github Fetcher</h1>
+      <h5 className="totalCount">There are {this.state.totalRepos} total repos in the database.</h5>      
       <Search onSearch={this.search.bind(this)}/>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos}
+                totalRepos={this.state.totalRepos}
+      />
     </div>)
   }
 }

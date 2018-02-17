@@ -39,12 +39,21 @@ let save = (data, callback) => {
 
 
 let find = (callback) => {
-  Repo.$where('this.size >= 0').exec((err, docs) => {
-    let topRepos = docs.sort((a,b) => b.size - a.size);
-    if (docs.length >= 25) {
-      topRepos = topRepos.slice(0, 25);
-    }
-    callback(topRepos);
+  // Repo.$where('this.size >= 0').exec((err, docs) => {
+  //   let topRepos = docs.sort((a,b) => b.size - a.size);
+  //   if (docs.length >= 25) {
+  //     topRepos = topRepos.slice(0, 25);
+  //   }
+  //   callback(topRepos);
+  // })
+  Repo.find().sort('-size').limit(25).exec((err, docs) => {
+    Repo.count((err, count) => {
+      // console.log('===> count: ', count);
+      docs.push(count);
+      callback(docs)
+    });
+    
+    ;
   })
 } 
 
