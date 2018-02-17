@@ -1,10 +1,20 @@
 import React from 'react';
 
-const RepoList = (props) => (
+const RepoList = (props) => {
+  return (
   <div>
-    <h4> Repo List Component </h4>
-    There are {props.repos.length} repos.
+    These are the Top {props.repos.length} repos by size.
+    {
+      props.repos.map((repo) => {
+        return <div>
+                  <a href={repo.repo_url}>{repo.username + ' - ' + repo.name}</a>
+                </div>
+      })
+      
+    }
+    
   </div>
-)
+  )
+}
 
 export default RepoList;

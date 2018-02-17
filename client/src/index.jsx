@@ -27,6 +27,9 @@ class App extends React.Component {
       success: (data)=> {
         console.log('Successfully connected to server!!');
         console.log(data);
+        this.setState({
+          repos: data
+        })
       },
       error: (error) => {
         console.log('ERROR - Could not connect to server: ', error);
@@ -41,7 +44,9 @@ class App extends React.Component {
       contentType: 'application/json',
       success: (data)=> {
         console.log('Data recevied');
-        console.log(data);
+        this.setState({
+          repos: data
+        })
       },
       error: (error) => {
         console.log('ERROR - Could not connect to server: ', error);
@@ -51,9 +56,9 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <h1>Github Fetcher</h1>      
       <Search onSearch={this.search.bind(this)}/>
+      <RepoList repos={this.state.repos}/>
     </div>)
   }
 }
