@@ -43,7 +43,7 @@ class App extends React.Component {
     $.ajax({
       type: "GET",
       url: '/repos',
-      success: (data)=> {
+      success: (data) => {
         console.log('Data recevied');
         this.setState({
           repos: data.slice(0,-1),
